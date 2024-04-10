@@ -8,4 +8,8 @@ Router.post('/register', UserController.RegisterUser);
 // Log In API
 
 
+// Get Users
+Router.get('/', UserController.GetUsers);
+
+
 module.exports = Router;

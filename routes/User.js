@@ -6,7 +6,7 @@ const UserController = require('../controllers/User');
 Router.post('/register', UserController.RegisterUser);
 
 // Log In API
-
+Router.post('/login', UserController.LoginUser);
 
 // Get Users
 Router.get('/', UserController.GetUsers);

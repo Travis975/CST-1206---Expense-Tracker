@@ -1,5 +1,6 @@
 const UserModel = require('../models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const RegisterUser = async (req,res) => { 
     const userBody = req.body;
@@ -63,16 +64,23 @@ const LoginUser = async (req, res) => {
         })
     }
 
+     const accessToken = await jwt.sign({
+        emai: userExists.email,
+        name: userExists.name
+        
+     }, process.env.JWT_SECRET_KEY)
+
     const userData = {
         id: userExists._id,
         email: userExists.email,
-        name: userExists.name
+        name: userExists.name,
+        token: accessToken
     }
 
     return res.status(200).json({
         message: "User Logged In!",
         data: userData
-        
+
     })
 
 }

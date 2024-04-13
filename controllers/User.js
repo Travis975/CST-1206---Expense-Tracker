@@ -3,20 +3,22 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const RegisterUser = async (req,res) => { 
+    // console.log(req.body);
     const userBody = req.body;
 
     if (!userBody.name || !userBody.email || !userBody.password){
         return res.status(400).json({
             message: 'Name, Email, or Password missing!'
-        })
+        });
     }
 
     const userExists = await UserModel.findOne({ email: userBody.email });
 
-    if (userExists){
+    if (userExists) {
+        console.log(userExists, 'user found!');
         return res.status(403).json({
             message: 'User already exists, use a different email'
-        })
+        });
     }
 
     const encryptedPassword = await bcrypt.hash(userBody.password, 10);
@@ -29,12 +31,12 @@ const RegisterUser = async (req,res) => {
     try {
         const savedUser = await newUser.save();
         return res.status(201).json({
-            mesaage: 'User Register Succesfully',
+            message: 'User Registered Succesfully!',
             data: savedUser
         })
     } catch(error){
         return res.status(500).json({
-            message: 'There was an error',
+            message: 'There was an error registering',
             error
         })
     }
@@ -64,11 +66,11 @@ const LoginUser = async (req, res) => {
         })
     }
 
-     const accessToken = await jwt.sign({
-        emai: userExists.email,
-        name: userExists.name
-        
-     }, process.env.JWT_SECRET_KEY)
+    const accessToken = jwt.sign({
+    emai: userExists.email,
+    name: userExists.name
+    
+    }, process.env.JWT_SECRET_KEY);
 
     const userData = {
         id: userExists._id,

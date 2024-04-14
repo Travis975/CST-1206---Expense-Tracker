@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 4000;
 const UserRoutes = require('./routes/user');
+const ExpenseRoutes = require('./routes/expense');
 const path = require('path');
 require('dotenv').config();
 
@@ -22,7 +23,8 @@ mongoose.connect(process.env.MONGODB_URL).then(() => {
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-app.use('/api/v2/users', UserRoutes);
+app.use('/api/v2/user', UserRoutes);
+app.use('/api/v2/user/expenses', ExpenseRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server Running at this port: ${PORT}`);

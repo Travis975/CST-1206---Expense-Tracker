@@ -13,7 +13,7 @@ async function registerUser(event) {
     }
 
     try {
-        const createdUser = await fetch('/api/v2/users/register', {
+        const createdUser = await fetch('/api/v2/user/register', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,7 +43,7 @@ async function loginUser(event) {
     }
 
     try {
-        const loggedinUser = await fetch('/api/v2/users/login', {
+        const loggedinUser = await fetch('/api/v2/user/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -54,7 +54,9 @@ async function loginUser(event) {
         const loggedinUserJSON = await loggedinUser.json();
 
         if (loggedinUserJSON) {
+            localStorage.setItem('token', loggedinUserJSON.data.token)
             alert(loggedinUserJSON.message);
+            window.location.href = 'http://localhost:4000/home.html'
         }
     } catch(error) {
         alert('There was an err!')

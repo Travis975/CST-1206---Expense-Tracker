@@ -1,4 +1,4 @@
-// functions for the frontend/UI
+// functions for the login, signup and landing page frontend/UI
 
 async function registerUser(event) {
     event.preventDefault();
@@ -25,6 +25,7 @@ async function registerUser(event) {
 
         if (createdUserJSON) {
             alert(createdUserJSON.message);
+            window.location.href = 'http://localhost:4000/login.html'
         }
     } catch(error) {
         alert('There was an err!')

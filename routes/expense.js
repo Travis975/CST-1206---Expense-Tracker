@@ -9,6 +9,6 @@ Router.post('/', ExpenseController.createExpense)
 Router.get('/', ExpenseController.getAllExpenses);
 
 // Delete Expense
-// Router.delete('/', ExpenseController.DeleteExpense);
+Router.delete('/:id', ExpenseController.deleteExpense);
 
 module.exports = Router;

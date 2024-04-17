@@ -18,6 +18,26 @@ const getAllExpenses = async (req, res) => {
     }
 }
 
+const getExpensesByMonth = async (req, res) => {
+    const { month } = req.query;
+
+    try {
+        const trackedExpenses = await ExpenseModel.find({
+            $expr: { $eq: [{ $month: '$date' }, parseInt(month)] }
+        });
+        return res.status(200).json({
+            message: 'Successfully found the expenses by month!',
+            data: trackedExpenses
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Error fetching expenses by month!',
+            error: error.message
+        });
+    }
+};
+
+
 const createExpense = async (req, res) => {
     const allHeaders = req.headers;
 
@@ -30,12 +50,10 @@ const createExpense = async (req, res) => {
 
 
     const decodedToken = jwt.decode(token, { complete: true});
-    
     const userId = decodedToken.payload.id;
-
     const userExists = await UserModel.findById(userId);
 
-    console.log('this is the user: ',decodedToken);
+    // console.log('this is the user: ',decodedToken);
 
     if (!userExists) {
         return res.status(401).json({
@@ -65,7 +83,7 @@ const createExpense = async (req, res) => {
 
 const deleteExpense = async (req, res) => {
     const expenseId = req.params.id;
-    console.log("should be the specific ID of the expense: ",expenseId)
+    // console.log("should be the specific ID of the expense: ",expenseId)
 
     try {
         // Check if expense exists
@@ -94,5 +112,6 @@ const deleteExpense = async (req, res) => {
 module.exports = {
     getAllExpenses,
     createExpense,
-    deleteExpense
+    deleteExpense,
+    getExpensesByMonth
 }

@@ -56,7 +56,7 @@ async function loginUser(event) {
 
         if (loggedinUserJSON) {
             localStorage.setItem('token', loggedinUserJSON.data.token)
-            alert(loggedinUserJSON.message);
+            console.log(loggedinUserJSON.message);
             window.location.href = 'http://localhost:4000/home.html'
         }
     } catch(error) {

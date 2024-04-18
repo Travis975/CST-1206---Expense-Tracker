@@ -1,17 +1,17 @@
-import express from 'express';
-import { connect } from 'mongoose';
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const PORT = 4000;
-import UserRoutes from './routes/user';
-import ExpenseRoutes from './routes/expense';
-import { join } from 'path';
+const UserRoutes = require('./routes/user');
+const ExpenseRoutes = require('./routes/expense');
+const path = require('path');
 require('dotenv').config();
 
 
-app.use(json());
+app.use(express.json());
 
 
-connect(process.env.MONGODB_URL).then(() => {
+mongoose.connect(process.env.MONGODB_URL).then(() => {
     console.log('Connected to the database');
 }).catch((error) => {
     console.log(`Error connecting to the database: ${error}`);
@@ -21,7 +21,7 @@ connect(process.env.MONGODB_URL).then(() => {
 //     res.send('Expense Tracker endpoints!');
 // });
 
-app.use(join(__dirname, 'frontend'));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
 app.use('/api/v2/user', UserRoutes);
 app.use('/api/v2/user/expenses', ExpenseRoutes);

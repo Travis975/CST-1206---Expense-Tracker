@@ -1,4 +1,4 @@
-import express, { json} from 'express';
+import express from 'express';
 import { connect } from 'mongoose';
 const app = express();
 const PORT = 4000;

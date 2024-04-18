@@ -25,7 +25,7 @@ async function registerUser(event) {
 
         if (createdUserJSON) {
             alert(createdUserJSON.message);
-            window.location.href = 'http://localhost:4000/login.html'
+            window.location.href = 'https://cst-1206-expense-tracker.onrender.com'
         }
     } catch(error) {
         alert('There was an err!')
@@ -57,7 +57,7 @@ async function loginUser(event) {
         if (loggedinUserJSON) {
             localStorage.setItem('token', loggedinUserJSON.data.token)
             console.log(loggedinUserJSON.message);
-            window.location.href = 'http://localhost:4000/home.html'
+            window.location.href = 'https://cst-1206-expense-tracker.onrender.com'
         }
     } catch(error) {
         alert('There was an err!')

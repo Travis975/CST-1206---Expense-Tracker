@@ -57,7 +57,7 @@ async function loginUser(event) {
         if (loggedinUserJSON) {
             localStorage.setItem('token', loggedinUserJSON.data.token)
             console.log(loggedinUserJSON.message);
-            window.location.href = 'https://cst-1206-expense-tracker.onrender.com'
+            window.location.href = 'https://cst-1206-expense-tracker.onrender.com/home.html'
         }
     } catch(error) {
         alert('There was an err!')

@@ -3,7 +3,7 @@ let expenseList = [];
 function checkIfUserLoggedIn() {
     const token = localStorage.getItem('token');
     if (!token) {
-        window.location.href = https://cst-1206-expense-tracker.onrender.com;
+        window.location.href = "https://cst-1206-expense-tracker.onrender.com";
     }
 }
 
@@ -230,7 +230,7 @@ function displayExpensesByMonth(expenses) {
 function logout(event) {
     event.preventDefault();
     localStorage.removeItem('token');
-    window.location.href = https://cst-1206-expense-tracker.onrender.com;
+    window.location.href = "https://cst-1206-expense-tracker.onrender.com";
 }
 
 checkIfUserLoggedIn();
